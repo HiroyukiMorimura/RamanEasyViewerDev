@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 統合ラマンスペクトル解析ツール
 メインスクリプト
@@ -11,6 +12,25 @@ Created on Wed Jun 11 15:56:04 2025
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+
+# ★ PyInstallerでのcp932エンコーディングエラー対策（絵文字対応）
+import os
+import sys
+
+# UTF-8エンコーディングを強制設定
+os.environ['PYTHONIOENCODING'] = 'utf-8'
+os.environ['PYTHONLEGACYWINDOWSFSENCODING'] = 'utf-8'
+
+# Windows環境での標準出力エンコーディング設定
+if sys.platform.startswith('win'):
+    try:
+        # Python 3.7以降
+        if hasattr(sys.stdout, 'reconfigure'):
+            sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+            sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        # エラーが発生してもアプリケーション自体は継続
+        pass
 
 # 循環インポートを回避するため、必要な時にインポートする関数を定義
 def get_auth_system():
